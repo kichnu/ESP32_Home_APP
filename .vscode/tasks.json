@@ -1,0 +1,41 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Upload project to ESP32 (PowerShell safe)",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-Command",
+        "mpremote connect COM3 -- reset ; Start-Sleep -Seconds 1 ; mpremote connect COM3 -- fs cp -r src : ; mpremote connect COM3 -- fs cp main.py :main.py"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Clean main.py on ESP32",
+      "type": "shell",
+      "command": "powershell",
+      "args": ["-Command", "mpremote connect COM3 -- fs rm :main.py"],
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Reset ESP32",
+      "type": "shell",
+      "command": "mpremote",
+      "args": ["connect", "COM3", "--", "reset"]
+    },
+    {
+      "label": "List files on ESP32",
+      "type": "shell",
+      "command": "mpremote",
+      "args": ["connect", "COM3", "--", "fs", "ls"],
+      "problemMatcher": []
+    }
+  ]
+}
