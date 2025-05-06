@@ -1,7 +1,7 @@
 try:
     import src.main
 
-    src.main.run()
+    src.main.main()
 except Exception as e:
     print("Error in main.py")
     import sys
