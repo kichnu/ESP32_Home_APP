@@ -1,0 +1,26 @@
+# Pliki środowiska
+.env
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logi
+*.log
+logs/
+mosquitto/log/
+
+# Bazy danych
+*.db
+*.sqlite
+mosquitto/data/
+
+# Pliki konfiguracyjne specyficzne dla środowiska
+mosquitto/config/passwd
+
+# Klucze SSL/certyfikaty
+ssl/private/
+
+# Tymczasowe pliki
+*.tmp
+.DS_Store
