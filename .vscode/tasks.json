@@ -2,40 +2,140 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Upload project to ESP32 (PowerShell safe)",
+      "label": "Upload to ESP32",
       "type": "shell",
-      "command": "powershell",
-      "args": [
-        "-Command",
-        "mpremote connect COM3 -- reset ; Start-Sleep -Seconds 1 ; mpremote connect COM3 -- fs cp -r src : ; mpremote connect COM3 -- fs cp main.py :main.py"
-      ],
+      "command": "./esp32_manage.sh",
+      "args": ["upload"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "group": {
         "kind": "build",
         "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
       }
     },
+    
     {
-      "label": "Clean main.py on ESP32",
+      "label": "Clean src folder on ESP32",
       "type": "shell",
-      "command": "powershell",
-      "args": ["-Command", "mpremote connect COM3 -- fs rm :main.py"],
+      "command": "./esp32_manage.sh",
+      "args": ["clean"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "presentation": {
         "reveal": "always"
-      },
-      "problemMatcher": []
+      }
     },
+    
+    {
+      "label": "Clean ALL files on ESP32",
+      "type": "shell",
+      "command": "./esp32_manage.sh",
+      "args": ["clean-all"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    
+    {
+      "label": "Format ESP32 filesystem",
+      "type": "shell",
+      "command": "./esp32_manage.sh",
+      "args": ["format"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    
     {
       "label": "Reset ESP32",
       "type": "shell",
-      "command": "mpremote",
-      "args": ["connect", "COM3", "--", "reset"]
+      "command": "./esp32_manage.sh",
+      "args": ["reset"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always"
+      }
     },
+    
     {
       "label": "List files on ESP32",
       "type": "shell",
-      "command": "mpremote",
-      "args": ["connect", "COM3", "--", "fs", "ls"],
-      "problemMatcher": []
+      "command": "./esp32_manage.sh",
+      "args": ["list"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    
+    {
+      "label": "Copy main.py from ESP32",
+      "type": "shell",
+      "command": "./esp32_manage.sh",
+      "args": ["copy"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    
+    {
+      "label": "Serial monitor ESP32",
+      "type": "shell",
+      "command": "./esp32_manage.sh",
+      "args": ["monitor"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "echo": true,
+        "focus": true,
+        "panel": "dedicated"
+      }
+    },
+    
+    {
+      "label": "Show ESP32 script help",
+      "type": "shell",
+      "command": "./esp32_manage.sh",
+      "args": ["help"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    
+    {
+      "label": "Full deployment (clean + upload + reset)",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Clean src folder on ESP32",
+        "Upload to ESP32",
+        "Reset ESP32"
+      ],
+      "presentation": {
+        "reveal": "always"
+      }
     }
   ]
 }

@@ -14,10 +14,10 @@ CONFIG = {
     "wifi": {"ssid": "KiG", "password": "3YqvXx5s3Z"},
     "mqtt": {
         "broker": "195.117.36.43",
-        "port": 8883,
+        "port": 1883,
         "client_id": "esp32_device_",
         "user": "iot_devices",
-        "password": "DXV%hwV&&hxNf2PP",
+        "password": "GFFTwq3y4SpXRnDc",
     },
     "device": {
         "id": "dim_light",
